@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil do Usuário | LensClick</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-1: #2a0f49;
+      --bg-2: #4a2fa3;
+      --bg-3: #6f49de;
+      --surface: #0d0f17;
+      --card: #0f1220;
+      --text: #f0f3ff;
+      --muted: #c9c9d6;
+      --accent-1: #a35bff;
+      --accent-2: #5bb3ff;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --maxw: 500px;
+      --transition: all 0.3s ease;
+    }
+    body {
+      margin: 0;
+      font-family: Poppins, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 50% 10%, #6a39f0 0%, #4b2a9f 40%, #20123a 100%) fixed;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .perfil-container {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 36px 28px;
+      max-width: var(--maxw);
+      width: 100%;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .perfil-foto {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(125, 112, 255, 0.25);
+      border: 3px solid transparent;
+      transition: box-shadow 0.4s, border 0.4s;
+      animation: borderPulse 2s infinite alternate;
+    }
+    @keyframes borderPulse {
+      0% { border-color: var(--accent-1); }
+      100% { border-color: var(--accent-2); }
+    }
+    .perfil-foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: transform 0.4s;
+    }
+    .perfil-foto:hover img {
+      transform: scale(1.07);
+    }
+    .perfil-nome {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+      color: var(--accent-2);
+      text-shadow: 0 2px 12px #5bb3ff44;
+      transition: color 0.3s;
+    }
+    .perfil-email {
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+    }
+    .perfil-info {
+      text-align: left;
+      margin: 24px 0 18px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 2px 12px #a35bff22;
+      transition: box-shadow 0.3s;
+    }
+    .perfil-info strong {
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+    .perfil-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+    .btn {
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s, box-shadow 0.3s, transform 0.2s;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #0a0b14;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn i {
+      margin-right: 6px;
+      transition: transform 0.3s;
+    }
+    .btn:hover i {
+      transform: rotate(-15deg) scale(1.2);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--accent-1);
+      box-shadow: none;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+    }
+    .perfil-card-extra {
+      margin: 18px auto 0 auto;
+      background: rgba(255,255,255,0.04);
+      border-radius: 14px;
+      padding: 14px 18px;
+      max-width: 340px;
+      box-shadow: 0 2px 12px #5bb3ff22;
+      text-align: center;
+      font-size: 1.05rem;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      animation: fadeIn 1s;
+    }
+    .perfil-card-extra .status {
+      color: #a6ffbf;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .perfil-card-extra .status i {
+      color: #a6ffbf;
+      animation: pulseCheck 1.2s infinite alternate;
+    }
+    @keyframes pulseCheck {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.2); }
+    }
+    #msgSucesso {
+      animation: fadeIn 0.5s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #a6ffbf;
+    }
+    #msgSucesso i {
+      color: #a6ffbf;
+      animation: pulseCheck 1.2s infinite alternate;
+    }
+    @media (max-width: 600px) {
+      .perfil-container {
+        padding: 12px 2px;
+        max-width: 98vw;
+      }
+      .perfil-foto {
+        width: 80px;
+        height: 80px;
+      }
+      .perfil-info, .perfil-actions {
+        padding: 8px;
+        gap: 8px;
+      }
+      .btn, .btn-outline {
+        font-size: 0.95rem;
+        padding: 10px 12px;
+      }
+      #nomeEdit, #emailEdit {
+        font-size: 1rem;
+        padding: 6px;
+      }
+      .perfil-card-extra {
+        padding: 10px 8px;
+        font-size: 0.98rem;
+      }
+    }
+    .btn, .btn-outline, .perfil-foto, .perfil-info {
+      transition: box-shadow 0.3s, transform 0.2s;
+    }
+    .btn:active, .btn-outline:active, .perfil-foto:active, .perfil-info:active {
+      box-shadow: 0 0 0 2px var(--accent-2);
+      transform: scale(0.98);
+    }
+    #msgSucesso {
+      animation: fadeIn 0.5s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="perfil-container">
+    <div class="perfil-foto" id="fotoContainer">
+      <img id="fotoPerfil" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto do usuário" />
+      <input type="file" id="inputFoto" accept="image/*" style="display:none;" />
+      <button class="btn btn-outline" id="trocarFoto" style="margin-top:8px; font-size:0.95rem;"><i class="fas fa-camera"></i> Trocar foto</button>
+    </div>
+    <div class="perfil-nome" id="nomeView">João Silva</div>
+    <input type="text" id="nomeEdit" value="João Silva" style="display:none; width:80%; margin:0 auto 6px; text-align:center; font-size:1.2rem; font-weight:600; border-radius:8px; border:1px solid #a35bff; padding:8px;" />
+    <div class="perfil-email" id="emailView"><i class="fas fa-envelope"></i> joao.silva@email.com</div>
+    <input type="email" id="emailEdit" value="joao.silva@email.com" style="display:none; width:80%; margin:0 auto 18px; text-align:center; font-size:1rem; border-radius:8px; border:1px solid #a35bff; padding:8px;" />
+    <div class="perfil-info" id="infoView">
+      <p><strong>Telefone:</strong> <span id="telView">(11) 91234-5678</span></p>
+      <p><strong>Cidade:</strong> <span id="cidadeView">São Paulo, SP</span></p>
+      <p><strong>Serviço favorito:</strong> <span id="servicoView">Casamento</span></p>
+      <p><strong>Membro desde:</strong> Março/2024</p>
+    </div>
+    <div class="perfil-info" id="infoEdit" style="display:none;">
+      <p><strong>Telefone:</strong> <input type="text" id="telEdit" value="(11) 91234-5678" style="width:70%; border-radius:8px; border:1px solid #a35bff; padding:6px;" /></p>
+      <p><strong>Cidade:</strong> <input type="text" id="cidadeEdit" value="São Paulo, SP" style="width:70%; border-radius:8px; border:1px solid #a35bff; padding:6px;" /></p>
+      <p><strong>Serviço favorito:</strong> <input type="text" id="servicoEdit" value="Casamento" style="width:70%; border-radius:8px; border:1px solid #a35bff; padding:6px;" /></p>
+      <p><strong>Membro desde:</strong> Março/2024</p>
+    </div>
+    <div class="perfil-actions">
+      <button class="btn" id="editarBtn"><i class="fas fa-edit"></i> Editar Perfil</button>
+      <button class="btn" id="salvarBtn" style="display:none;"><i class="fas fa-save"></i> Salvar</button>
+      <button class="btn btn-outline" onclick="window.location.href='index.html'"><i class="fas fa-sign-out-alt"></i> Sair</button>
+    </div>
+    <div class="perfil-card-extra">
+      <div><strong>Último acesso:</strong> 10/06/2024 14:32</div>
+      <div class="status"><i class="fas fa-check-circle"></i> Perfil ativo</div>
+    </div>
+    <p id="msgSucesso" style="display:none;"><i class="fas fa-check-circle"></i> Perfil atualizado com sucesso!</p>
+  </div>
+  <script>
+    // Alterna entre modo visualização e edição
+    const editarBtn = document.getElementById('editarBtn');
+    const salvarBtn = document.getElementById('salvarBtn');
+    const nomeView = document.getElementById('nomeView');
+    const nomeEdit = document.getElementById('nomeEdit');
+    const emailView = document.getElementById('emailView');
+    const emailEdit = document.getElementById('emailEdit');
+    const infoView = document.getElementById('infoView');
+    const infoEdit = document.getElementById('infoEdit');
+    const msgSucesso = document.getElementById('msgSucesso');
+    editarBtn.onclick = () => {
+      nomeView.style.display = 'none';
+      nomeEdit.style.display = 'block';
+      emailView.style.display = 'none';
+      emailEdit.style.display = 'block';
+      infoView.style.display = 'none';
+      infoEdit.style.display = 'block';
+      editarBtn.style.display = 'none';
+      salvarBtn.style.display = 'inline-block';
+      document.querySelector('.perfil-container').style.boxShadow = '0 0 0 4px #a35bff44';
+    };
+    salvarBtn.onclick = () => {
+      nomeView.textContent = nomeEdit.value;
+      emailView.innerHTML = '<i class="fas fa-envelope"></i> ' + emailEdit.value;
+      document.getElementById('telView').textContent = document.getElementById('telEdit').value;
+      document.getElementById('cidadeView').textContent = document.getElementById('cidadeEdit').value;
+      document.getElementById('servicoView').textContent = document.getElementById('servicoEdit').value;
+      nomeView.style.display = 'block';
+      nomeEdit.style.display = 'none';
+      emailView.style.display = 'block';
+      emailEdit.style.display = 'none';
+      infoView.style.display = 'block';
+      infoEdit.style.display = 'none';
+      editarBtn.style.display = 'inline-block';
+      salvarBtn.style.display = 'none';
+      msgSucesso.style.display = 'flex';
+      msgSucesso.style.animation = 'fadeIn 0.5s';
+      document.querySelector('.perfil-container').style.boxShadow = '';
+      setTimeout(()=>msgSucesso.style.display='none', 3000);
+    };
+    // Trocar foto do perfil
+    const trocarFoto = document.getElementById('trocarFoto');
+    const inputFoto = document.getElementById('inputFoto');
+    const fotoPerfil = document.getElementById('fotoPerfil');
+    trocarFoto.onclick = () => inputFoto.click();
+    inputFoto.onchange = (e) => {
+      const file = e.target.files[0];
+      if(file){
+        const reader = new FileReader();
+        reader.onload = function(ev){
+          fotoPerfil.src = ev.target.result;
+          fotoPerfil.style.animation = 'fadeIn 0.5s';
+          setTimeout(()=>fotoPerfil.style.animation='', 600);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+  </script>
+</body>
+</html>
